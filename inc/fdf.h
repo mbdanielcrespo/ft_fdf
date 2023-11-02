@@ -2,9 +2,7 @@
 # define FTF_H
 # include <stdio.h>
 # include <fcntl.h>
-# include "../libft/ft_libft/libft.h"
-# include "../libft/ft_printf/ft_printf.h"
-# include "../libft/ft_get_next_line/get_next_line.h"
+# include "../libft/libft.h"
 
 typedef struct	s_fdf
 {
