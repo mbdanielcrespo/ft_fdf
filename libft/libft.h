@@ -6,7 +6,7 @@
 /*   By: danalmei <danalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:53:02 by danalmei          #+#    #+#             */
-/*   Updated: 2023/10/24 14:51:02 by danalmei         ###   ########.fr       */
+/*   Updated: 2023/11/02 18:37:10 by danalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef signed char				t_i8;
 typedef unsigned char			t_u8;
 typedef const unsigned char		t_cuc;
 typedef signed int				t_i32;
-typedef unsigned int			t_u32;
+typedef unsigned int			t_u32;int ft_max(int a, int b)
 typedef signed long long int	t_i64;
 
 typedef size_t					t_size;
@@ -81,10 +81,11 @@ void	ft_putstr_fd(char *s, t_i32 fd);
 int		ft_printf(const char *str, ...);
 int		ft_print_ptr(unsigned long ptr);
 int		ft_putchar_fdp(t_i8 c, t_i32 fd);
-void	ft_putendl_fd(char *s, t_i32 fd);
 int		ft_putnbr_fdp(t_i32 n, t_i32 fd);
 int		ft_putstr_fdp(char *s, t_i32 fd);
 
+int		ft_abs(int a);
+int		ft_max(int a, int b);
 int		ft_pow(int num, int pow);
 void	ft_swap(int *x, int *y);
 void	ft_error(char *msg);

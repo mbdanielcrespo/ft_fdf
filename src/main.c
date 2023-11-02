@@ -1,33 +1,38 @@
-#include "../inc/fdf.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: danalmei <danalmei@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/02 17:31:46 by danalmei          #+#    #+#             */
+/*   Updated: 2023/11/02 18:26:26 by danalmei         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-/*void	test_gnl(char *filename)
+# include "../inc/fdf.h"
+/*
+int	deal_key(int key, void *data)
 {
-	int	fd;
-	char *line;
-
-	fd = open(filename, O_RDONLY, 0);
-	line = get_next_line(fd);
-	while (line != NULL)
-	{
-		printf("%s\n", line);
-		line = get_next_line(fd);
-	}
+	ft_printf("%d\n", key); 
+	return (0);
 }*/
 
 int main(int argc, char **argv)
 {
     t_fdf *data;
-	//char *line;
-	//int	fd;
 	int	i;
 	int	j;
 
+	ft_printf("Program started\n");
     data = (t_fdf*)malloc(sizeof(t_fdf));
+	ft_printf("Data structure created\n");
 	read_file(argv[1], data);
+	ft_printf("File read correctly\n");
 	if (argc > 2)
-		printf("Too many arguments!");
+		printf("Too many arguments!\n");
 	i = 0;
-	printf("Height: %d\n Width: %d\n", data->height, data->width);
+	ft_printf("Height: %d\n Width: %d\n", data->height, data->width);
 	while (i < data->height)
 	{
 		j = 0;
@@ -39,4 +44,11 @@ int main(int argc, char **argv)
 		printf("\n");
 		i++;
 	}
+	data->mlx_ptr = mlx_init();
+	data->win_ptr = mlx_new_window(data->mlx_ptr, 100, 100, "FDF");
+
+	breshenham(10, 10, 600, 300, data);
+	
+	//mlx_key_hook(data->win_ptr, deal_key, NULL);
+	mlx_loop(data->mlx_ptr);
 }
