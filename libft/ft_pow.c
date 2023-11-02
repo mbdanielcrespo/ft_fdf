@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_pow.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: danalmei <danalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/25 20:08:49 by danalmei          #+#    #+#             */
-/*   Updated: 2023/05/03 17:49:43 by danalmei         ###   ########.fr       */
+/*   Created: 2023/10/23 19:12:34 by danalmei          #+#    #+#             */
+/*   Updated: 2023/10/23 19:16:06 by danalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "libft.h"
 
-# define HEX_L "0123456789abcdef"
-# define HEX_U "0123456789ABCDEF"
-# include <stdio.h> //#Remove
-# include <unistd.h>
-# include <stdarg.h>
-# include "../ft_libft/libft.h"
-
-int	ft_printf(const char *str, ...);
-int	ft_print_ptr(unsigned long ptr);
-
-#endif
+int	ft_pow(int num, int pow)
+{
+	if (pow)
+		return (num * ft_pow(num, pow - 1));
+	else
+		return (1);
+}

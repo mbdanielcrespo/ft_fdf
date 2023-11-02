@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danalmei <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: danalmei <danalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/12 13:13:48 by danalmei          #+#    #+#             */
-/*   Updated: 2023/04/18 14:05:46 by danalmei         ###   ########.fr       */
+/*   Created: 2023/04/12 12:49:56 by danalmei          #+#    #+#             */
+/*   Updated: 2023/10/23 19:26:37 by danalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
-{	
-	t_list	*aux;
+t_size	ft_strlen(const char *str)
+{
+	t_i32	c;
 
-	if (lst && del)
-	{
-		aux = lst;
-		(del)(lst->content);
-		lst = lst->next;
-		free(aux);
-	}
+	c = 0;
+	while (str[c] != '\0')
+		c++;
+	return (c);
 }

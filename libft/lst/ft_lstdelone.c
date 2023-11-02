@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: danalmei <danalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/23 21:01:45 by danalmei          #+#    #+#             */
-/*   Updated: 2023/05/01 16:06:28 by danalmei         ###   ########.fr       */
+/*   Created: 2023/04/12 13:13:48 by danalmei          #+#    #+#             */
+/*   Updated: 2023/10/23 19:10:59 by danalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-# include <stdio.h>
-# include "../ft_libft/libft.h"
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
+{
+	t_list	*aux;
 
-char	*ft_strjoin_gnl(char *s1, char *s2);
-size_t	ft_strlen_gnl(char *str);
-char	*ft_strchr_gnl(char	*str, int ch);
-char	*get_next_line(int fd);
-char	*ft_st_save(char *st_save);
-char	*ft_read_st_save(int fd, char *save);
-
-#endif
+	if (lst && del)
+	{
+		aux = lst;
+		(del)(lst->content);
+		lst = lst->next;
+		free(aux);
+	}
+}

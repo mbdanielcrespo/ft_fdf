@@ -6,7 +6,7 @@
 /*   By: danalmei <danalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 21:27:55 by danalmei          #+#    #+#             */
-/*   Updated: 2023/05/03 18:19:17 by danalmei         ###   ########.fr       */
+/*   Updated: 2023/10/23 19:09:41 by danalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	ft_print_ptr(unsigned long ptr)
 	{
 		print_len += ft_putstr_fdp("0x", 1);
 		print_len += ft_write_ptr(ptr);
-		
 	}
 	return (print_len);
 }

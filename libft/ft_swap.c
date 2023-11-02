@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_swap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danalmei <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: danalmei <danalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/12 12:49:56 by danalmei          #+#    #+#             */
-/*   Updated: 2023/04/12 12:50:36 by danalmei         ###   ########.fr       */
+/*   Created: 2023/10/24 14:12:14 by danalmei          #+#    #+#             */
+/*   Updated: 2023/10/24 18:53:43 by danalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_size	ft_strlen(const char *str)
+void	ft_swap(int *x, int *y)
 {
-	t_i32	c;
+	int	tmp;
 
-	c = 0;
-	while (str[c] != '\0')
-	{
-		c++;
-	}
-	return (c);
+	tmp = *x;
+	*x = *y;
+	*y = tmp;
 }
