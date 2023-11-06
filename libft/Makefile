@@ -9,7 +9,8 @@ SRC_FILES = ft_atoi.c ft_isascii.c ft_memcmp.c ft_putchar_fd.c ft_putstr_fd.c \
             ft_itoa.c ft_memset.c ft_putnbr_fd.c ft_strchr.c ft_strlcpy.c \
             ft_strrchr.c ft_isalpha.c ft_memchr.c ft_pow.c ft_putnbr_fdp.c \
             ft_strdup.c ft_strlen.c ft_strtrim.c ft_printf.c ft_printf_ptr.c \
-            ft_swap.c get_next_line.c get_next_line_utils.c ft_error.c
+            ft_swap.c get_next_line.c get_next_line_utils.c ft_error.c \
+            ft_max.c ft_abs.c
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
 

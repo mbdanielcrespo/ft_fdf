@@ -11,13 +11,16 @@ typedef struct	s_fdf
 	int width;
 	int height;
 	int **z_data;
+	int	zoom;
+	int	color;
 
 	void    *mlx_ptr;
 	void    *win_ptr;
 }				t_fdf;
 
-void	breshenham(int x1, int y1, int x2, int y2, t_fdf *data);
+void	breshenham(float x1, float y1, float x2, float y2, t_fdf *data);
 void	read_file(char *file_name, t_fdf *data);
+void	draw(t_fdf *data);
 int		ft_max(int a, int b);
 float	ft_abs(float a);
 

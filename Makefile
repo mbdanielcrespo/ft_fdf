@@ -4,14 +4,16 @@ RM = rm -f
 CFLAGS = -Wall -Werror -Wextra
 
 MLX = minilibx-linux/libmlx.a
-MLX_FLAGS = -Lminilibx-linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+MLX_FLAGS = -Lminilibx-linux -Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 
 SRC = src/main.c \
 src/read_file.c \
-src/draw.c \
-src/utils.c
+src/draw.c
 
 OBJ = $(SRC:.c =.o)
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 LIBFT = libft/ft_libft.a
 
@@ -24,20 +26,15 @@ $(LIBFT):
 $(MLX):
 	make -C minilibx-linux
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
 all: $(NAME) 
 
 clean:
-	make clean -C ./libft
-	make clean -C ./minilibx-linux
-	$(RM) $(OBJ)
+	@make clean -C ./libft
+	@$(RM) $(OBJ)
 
 fclean:
-	make fclean -C ./libft
-	make clean -C ./minilibx-linux
-	$(RM) $(NAME)
+	@make fclean -C ./libft
+	@$(RM) $(NAME)
 
 re: fclean all
 

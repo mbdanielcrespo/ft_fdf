@@ -6,13 +6,13 @@
 /*   By: danalmei <danalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 18:32:41 by danalmei          #+#    #+#             */
-/*   Updated: 2023/11/02 18:33:59 by danalmei         ###   ########.fr       */
+/*   Updated: 2023/11/06 12:37:43 by danalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "libft.h"
 
-int ft_abs(int a)
+float ft_abs(float a)
 {
     if (a < 0)
         return (-a);
