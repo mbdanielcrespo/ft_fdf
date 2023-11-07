@@ -6,7 +6,7 @@
 /*   By: danalmei <danalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 17:31:36 by danalmei          #+#    #+#             */
-/*   Updated: 2023/11/06 18:22:22 by danalmei         ###   ########.fr       */
+/*   Updated: 2023/11/07 12:56:36 by danalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,24 @@ void	isometric(float *x, float *y, int z)
 	*y = (*x + *y) * sin(0.8) - z;
 }
 
+void	set_zoom(float *x, float *y, float *x1, float *y1, t_fdf *data)
+{
+	*x *= data->zoom;
+	*y *= data->zoom;
+	*x1 *= data->zoom;
+	*y1 *= data->zoom;
+}
+
+void	set_color(int z, int z1, t_fdf *data)
+{
+	if (z < 0 || z1 < 0)
+		data->color = 0xe80c0c;
+	else if ((z > 0 || z1 > 0))
+		data->color = 0x008000;
+	else
+		data->color = 0xffffff;
+}
+
 void	breshenham(float x, float y, float x1, float y1, t_fdf *data)		// (1,1, 3, 12)
 {
 	float x_step;
@@ -29,25 +47,16 @@ void	breshenham(float x, float y, float x1, float y1, t_fdf *data)		// (1,1, 3, 
 
 	z = data->z_data[(int)y][(int)x];
 	z1 = data->z_data[(int)y1][(int)x1];
-	//-----------------zoom
-	x *= data->zoom;
-	y *= data->zoom;
-	x1 *= data->zoom;
-	y1 *= data->zoom;
-	
-	//-----------------color
-	if (z > 0 || z1 > 0)
-		data->color = 0xe80c0c;
-	else
-		data->color = 0xffffff;
+	set_zoom(&x, &y, &x1, &y1, data);
+	set_color(z, z1, data);
 	//-----------------3D
 	isometric(&x, &y, z);
 	isometric(&x1, &y1, z1);
 
-	x += 150;
-	y += 150;
-	x1 += 150;
-	y1 += 150;
+	x += data->shift_x;
+	y += data->shift_y;
+	x1 += data->shift_x;
+	y1 += data->shift_y;
 
 	x_step = x1 - x; // x: 3 - 1 =	 2 -2
 	y_step = y1 - y; // y: 12 - 1 = 11 -11
@@ -81,5 +90,4 @@ void	draw(t_fdf *data)
 		}
 		y++;
 	}
-	
 }

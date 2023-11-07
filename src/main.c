@@ -6,17 +6,42 @@
 /*   By: danalmei <danalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 17:31:46 by danalmei          #+#    #+#             */
-/*   Updated: 2023/11/06 17:59:48 by danalmei         ###   ########.fr       */
+/*   Updated: 2023/11/07 17:32:05 by danalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../inc/fdf.h"
-/*
-int	deal_key(int key, void *data)
+
+void	window_controls(int key, t_fdf *data)
 {
-	ft_printf("%d\n", key); 
+	if (key == 65307)
+		destroy_all(data);
+}
+
+void	image_controls(int key, t_fdf *data)
+{
+	if (key == 65361)
+		data->shift_x -= 10;
+	if (key == 65362)
+		data->shift_y -= 10;
+	if (key == 65363)
+		data->shift_x += 10;
+	if (key == 65364)
+		data->shift_y += 10;
+	if (key == 122)
+		data->zoom += 5;
+	if (key == 109)
+		data->zoom -= 5;
+	mlx_clear_window(data->mlx_ptr, data->win_ptr);
+	draw(data);
+}
+
+int	deal_key(int key, t_fdf *data)
+{
+	window_controls(key, data);
+	image_controls(key, data);
 	return (0);
-}*/
+}
 
 void	print_map(t_fdf *data)
 {
@@ -30,7 +55,7 @@ void	print_map(t_fdf *data)
 		j = 0;
 		while (j < (data->width))
 		{
-			printf("%3d", data->z_data[i][j]);
+			printf("%4d", data->z_data[i][j]);
 			j++;
 		}
 		printf("\n");
@@ -42,16 +67,22 @@ int main(int argc, char **argv)
 {
     t_fdf *data;
 
+	if (argc != 2)
+		ft_error("Invalid number of arguments!");
     data = (t_fdf*)malloc(sizeof(t_fdf));
+	if (!data)
+		ft_error("Error on memory allocation");
 	read_file(argv[1], data);
-	ft_printf("File read correctly!\n");
-	if (argc > 2)
-		printf("Too many arguments!\n");
+	ft_printf("File read succesfully!\n");
+	print_map(data);
 	ft_printf("Opening window ...\n");
 	data->mlx_ptr = mlx_init();
 	data->win_ptr = mlx_new_window(data->mlx_ptr, 500, 500, "FDF");
-	data->zoom = 20;
+	init_fdf(data);
+	ft_printf("Window opend succesfully!\n");
 	draw(data);
-	//mlx_key_hook(data->win_ptr, deal_key, NULL);
+	mlx_key_hook(data->win_ptr, deal_key, data);
 	mlx_loop(data->mlx_ptr);
+	ft_printf("Data freed successfully!\n");
+	return (0);
 }

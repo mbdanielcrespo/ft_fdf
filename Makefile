@@ -1,14 +1,15 @@
 NAME = fdf
 CC = gcc
 RM = rm -f
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra #-g -fsanitize=address
 
 MLX = minilibx-linux/libmlx.a
 MLX_FLAGS = -Lminilibx-linux -Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 
 SRC = src/main.c \
 src/read_file.c \
-src/draw.c
+src/draw.c \
+src/god.c
 
 OBJ = $(SRC:.c =.o)
 

@@ -6,7 +6,7 @@
 /*   By: danalmei <danalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 18:30:10 by danalmei          #+#    #+#             */
-/*   Updated: 2023/11/06 17:56:21 by danalmei         ###   ########.fr       */
+/*   Updated: 2023/11/07 17:26:40 by danalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ int get_height(char *file_name)
 	int		fd;
 	int		height;
 
-	fd = open(file_name, O_RDONLY, 0);
 	height = 0;
+	fd = open(file_name, O_RDONLY, 0);
+	if (!fd)
+		return (-1);
 	line = "init";
 	while (line != NULL)
 	{
@@ -27,7 +29,7 @@ int get_height(char *file_name)
 		height++;
 		free(line);
 	}
-	//free(line);			//Possible memory leaks
+	//free(line);
 	close(fd);
 	return (height);
 }
@@ -41,6 +43,8 @@ int	get_width(char *file_name)
 
 	width = 0;
 	fd = open(file_name, O_RDONLY, 0);
+	if (!fd)
+		return (-1);
 	line = get_next_line(fd);
 	wrds = ft_split(line, ' ');
 	while (wrds[width] != NULL)
@@ -50,12 +54,13 @@ int	get_width(char *file_name)
 	}
 	while (line != NULL)
 	{
-		line = get_next_line(fd);
 		free(line);
+		line = get_next_line(fd);
 	}
-	free(wrds);			//	Leaks 
+	free(line);
+	free(wrds);
 	close(fd);
-	return (width);
+	return (width - 1);
 }
 
 void	fill_z_data(int	*z_line, char *line)
@@ -84,7 +89,7 @@ void    read_file(char *file_name, t_fdf *data)
 	data->height = get_height(file_name);
 	data->width = get_width(file_name);
 	data->z_data = (int **)malloc(sizeof(int *) * (data->height - 1));
-	while (i <= data->height)
+	while (i < data->height - 1)
 		data->z_data[i++] = (int *)malloc((sizeof(int) * (data->width + 1)));
 	i = 0;
 	fd = open(file_name, O_RDONLY, 0);
@@ -96,6 +101,7 @@ void    read_file(char *file_name, t_fdf *data)
 		line = get_next_line(fd);
 		i++;
 	}
+	free(line);
 	data->z_data[i] = NULL;
 	close(fd);
 }

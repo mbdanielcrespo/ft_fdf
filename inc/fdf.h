@@ -13,6 +13,8 @@ typedef struct	s_fdf
 	int **z_data;
 	int	zoom;
 	int	color;
+	int	shift_x;
+	int	shift_y;
 
 	void    *mlx_ptr;
 	void    *win_ptr;
@@ -23,5 +25,9 @@ void	read_file(char *file_name, t_fdf *data);
 void	draw(t_fdf *data);
 int		ft_max(int a, int b);
 float	ft_abs(float a);
+void	init_fdf(t_fdf *data);
+void	destroy_mlx(t_fdf *data);
+void    destroy_fdf(t_fdf *data);
+void	destroy_all(t_fdf *data);
 
 #endif
