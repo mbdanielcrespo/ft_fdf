@@ -13,9 +13,14 @@ typedef struct	s_fdf
 	int **z_data;
 	int	zoom;
 	int	color;
+	int	steepness;
 	int	shift_x;
 	int	shift_y;
+	float	alpha;
+	float	beta;
 
+	int		win_w;
+	int		win_h;
 	void    *mlx_ptr;
 	void    *win_ptr;
 }				t_fdf;

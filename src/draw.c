@@ -6,26 +6,12 @@
 /*   By: danalmei <danalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 17:31:36 by danalmei          #+#    #+#             */
-/*   Updated: 2023/11/07 12:56:36 by danalmei         ###   ########.fr       */
+/*   Updated: 2023/11/08 18:55:32 by danalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../inc/fdf.h"
 # include <math.h>
-
-void	isometric(float *x, float *y, int z)
-{
-	*x = (*x - *y) * cos(0.8);
-	*y = (*x + *y) * sin(0.8) - z;
-}
-
-void	set_zoom(float *x, float *y, float *x1, float *y1, t_fdf *data)
-{
-	*x *= data->zoom;
-	*y *= data->zoom;
-	*x1 *= data->zoom;
-	*y1 *= data->zoom;
-}
 
 void	set_color(int z, int z1, t_fdf *data)
 {
@@ -37,11 +23,66 @@ void	set_color(int z, int z1, t_fdf *data)
 		data->color = 0xffffff;
 }
 
-void	breshenham(float x, float y, float x1, float y1, t_fdf *data)		// (1,1, 3, 12)
+void	set_zoom(float *x, float *y, float *x1, float *y1, t_fdf *data)
+{
+	*x *= data->zoom;
+	*y *= data->zoom;
+	*x1 *= data->zoom;
+	*y1 *= data->zoom;
+}
+
+void	set_shift(float *x, float *y, float *x1, float *y1, t_fdf *data)
+{
+	*x += data->shift_x;
+	*y += data->shift_y;
+	*x1 += data->shift_x;
+	*y1 += data->shift_y;
+}
+
+
+void	set_steepness(int *z, int *z1, t_fdf *data)
+{
+	*z *= data->steepness;
+	*z1 *= data->steepness;
+}
+
+void	isometric(float *x, float *y, int z, t_fdf *data)
+{
+	float previous_x = *x;
+    float previous_y = *y;
+
+	*y = previous_y * cos(data->alpha) + z * sin(data->alpha);
+    z = -previous_y * sin(data->alpha) + z * cos(data->alpha);
+
+    previous_y = *y;
+    *x = previous_x * cos(data->beta) - z * sin(data->beta);
+    z = previous_x * sin(data->beta) + z * cos(data->beta);
+
+    *x = (*x - *y);
+    *y = (*x + previous_y) - z;
+}
+
+void	breshenham(float x, float y, float x1, float y1, t_fdf *data)
 {
 	float x_step;
 	float y_step;
 	int max;
+
+	x_step = x1 - x;
+	y_step = y1 - y;
+	max = ft_max(ft_abs(x_step), ft_abs(y_step));
+	x_step /= max;
+	y_step /= max;
+	while ((int)(x - x1) || (int)(y - y1))
+	{
+		mlx_pixel_put(data->mlx_ptr, data->win_ptr, x, y, data->color);
+		x += x_step;
+		y += y_step;
+	}
+}
+
+void	draw_line(float x, float y, float x1, float y1, t_fdf *data)
+{
 	int	z;
 	int z1;
 
@@ -49,26 +90,15 @@ void	breshenham(float x, float y, float x1, float y1, t_fdf *data)		// (1,1, 3, 
 	z1 = data->z_data[(int)y1][(int)x1];
 	set_zoom(&x, &y, &x1, &y1, data);
 	set_color(z, z1, data);
-	//-----------------3D
-	isometric(&x, &y, z);
-	isometric(&x1, &y1, z1);
-
-	x += data->shift_x;
-	y += data->shift_y;
-	x1 += data->shift_x;
-	y1 += data->shift_y;
-
-	x_step = x1 - x; // x: 3 - 1 =	 2 -2
-	y_step = y1 - y; // y: 12 - 1 = 11 -11
-	max = ft_max(ft_abs(x_step), ft_abs(y_step));	// max (11, 2)
-	x_step /= max;	// 2 / 11 = 0,181818
-	y_step /= max;	// 11 / 11 = 1
-	while ((int)(x - x1) || (int)(y - y1))
-	{
-		mlx_pixel_put(data->mlx_ptr, data->win_ptr, x, y, data->color);
-		x += x_step;
-		y += y_step;
-	}
+	set_steepness(&z, &z1, data);
+	printf("Alfa: %.2f\n", data->alpha);
+	printf("Beta: %.2f\n", data->beta);
+	
+	isometric(&x, &y, z, data);
+	isometric(&x1, &y1, z1, data);
+	
+	set_shift(&x, &y, &x1, &y1, data);
+	breshenham(x, y, x1, y1, data);
 }
 
 void	draw(t_fdf *data)
@@ -83,9 +113,9 @@ void	draw(t_fdf *data)
 		while (x < data->width)
 		{
 			if (x < (data->width - 1))
-				breshenham(x, y, x + 1, y, data);
+				draw_line(x, y, x + 1, y, data);
 			if (y < (data->height - 2))
-				breshenham(x, y, x, y + 1, data);
+				draw_line(x, y, x, y + 1, data);
 			x++;
 		}
 		y++;

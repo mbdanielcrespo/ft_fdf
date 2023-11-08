@@ -1,7 +1,7 @@
 NAME = fdf
 CC = gcc
 RM = rm -f
-CFLAGS = -Wall -Werror -Wextra #-g -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -g -fsanitize=address
 
 MLX = minilibx-linux/libmlx.a
 MLX_FLAGS = -Lminilibx-linux -Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz

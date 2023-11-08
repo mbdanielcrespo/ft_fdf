@@ -6,7 +6,7 @@
 /*   By: danalmei <danalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 18:30:10 by danalmei          #+#    #+#             */
-/*   Updated: 2023/11/07 17:26:40 by danalmei         ###   ########.fr       */
+/*   Updated: 2023/11/08 16:29:31 by danalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void    read_file(char *file_name, t_fdf *data)
 	i = 0;
 	data->height = get_height(file_name);
 	data->width = get_width(file_name);
-	data->z_data = (int **)malloc(sizeof(int *) * (data->height - 1));
+	data->z_data = (int **)malloc(sizeof(int *) * (data->height));
 	while (i < data->height - 1)
 		data->z_data[i++] = (int *)malloc((sizeof(int) * (data->width + 1)));
 	i = 0;
