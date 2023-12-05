@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 # include "../inc/fdf.h"
-# include <math.h>
 
 void	set_color(int z, int z1, t_fdf *data)
 {
@@ -39,7 +38,6 @@ void	set_shift(float *x, float *y, float *x1, float *y1, t_fdf *data)
 	*y1 += data->shift_y;
 }
 
-
 void	set_steepness(int *z, int *z1, t_fdf *data)
 {
 	*z *= data->steepness;
@@ -48,18 +46,8 @@ void	set_steepness(int *z, int *z1, t_fdf *data)
 
 void	isometric(float *x, float *y, int z, t_fdf *data)
 {
-	float previous_x = *x;
-    float previous_y = *y;
-
-	*y = previous_y * cos(data->alpha) + z * sin(data->alpha);
-    z = -previous_y * sin(data->alpha) + z * cos(data->alpha);
-
-    previous_y = *y;
-    *x = previous_x * cos(data->beta) - z * sin(data->beta);
-    z = previous_x * sin(data->beta) + z * cos(data->beta);
-
-    *x = (*x - *y);
-    *y = (*x + previous_y) - z;
+	*x = (*x - *y) * cos(0.8);
+	*y = (*x + *y) * sin(0.8) - z;
 }
 
 void	breshenham(float x, float y, float x1, float y1, t_fdf *data)
@@ -91,8 +79,6 @@ void	draw_line(float x, float y, float x1, float y1, t_fdf *data)
 	set_zoom(&x, &y, &x1, &y1, data);
 	set_color(z, z1, data);
 	set_steepness(&z, &z1, data);
-	printf("Alfa: %.2f\n", data->alpha);
-	printf("Beta: %.2f\n", data->beta);
 	
 	isometric(&x, &y, z, data);
 	isometric(&x1, &y1, z1, data);

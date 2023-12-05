@@ -16,8 +16,6 @@ typedef struct	s_fdf
 	int	steepness;
 	int	shift_x;
 	int	shift_y;
-	float	alpha;
-	float	beta;
 
 	int		win_w;
 	int		win_h;

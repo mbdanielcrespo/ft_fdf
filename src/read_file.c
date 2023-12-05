@@ -105,3 +105,23 @@ void    read_file(char *file_name, t_fdf *data)
 	data->z_data[i] = NULL;
 	close(fd);
 }
+
+void	print_map(t_fdf *data)
+{
+	int	i;
+	int j;
+
+	ft_printf("\nHeight: %d\n Width: %d\n", data->height, data->width);
+	i = 0;
+	while (i < (data->height - 1))
+	{
+		j = 0;
+		while (j < (data->width))
+		{
+			printf("%4d", data->z_data[i][j]);
+			j++;
+		}
+		printf("\n");
+		i++;
+	}
+}

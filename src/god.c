@@ -7,8 +7,6 @@ void	init_fdf(t_fdf *data)
 	data->shift_y = 0;
 	data->zoom = 25;
 	data->steepness = 1;
-	data->alpha = 0.6;
-	data->beta = 0;
 }
 
 void	destroy_mlx(t_fdf *data)
@@ -39,9 +37,9 @@ void    destroy_fdf(t_fdf *data)
 					i++;
 				}
 			}
-			free(data->z_data); // = NULL;
+			free(data->z_data);
 		}
-		free(data); // = NULL;
+		free(data);
 	}
 }
 

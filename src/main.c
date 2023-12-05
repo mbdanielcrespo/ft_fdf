@@ -15,7 +15,7 @@
 void	init_window(int width, int height, t_fdf *data)
 {
 	data->win_w = width;
-	data->win_h = height;	
+	data->win_h = height;
 }
 
 void	window_controls(int key, t_fdf *data)
@@ -42,14 +42,6 @@ void	image_controls(int key, t_fdf *data)
 		data->steepness += 1;
 	if (key == 118)
 		data->steepness -= 1;
-	if (key == 97)
-		data->alpha += 0.2;
-	if (key == 100)
-		data->alpha -= 0.2;
-	if (key == 119)
-		data->beta += 0.1;
-	if (key == 115)
-		data->beta -= 0.1;
 	mlx_clear_window(data->mlx_ptr, data->win_ptr);
 	draw(data);
 }
@@ -64,26 +56,6 @@ int	deal_key(int key, t_fdf *data)
 	return (0);
 }
 
-void	print_map(t_fdf *data)
-{
-	int	i;
-	int j;
-
-	ft_printf("\nHeight: %d\n Width: %d\n", data->height, data->width);
-	i = 0;
-	while (i < (data->height - 1))
-	{
-		j = 0;
-		while (j < (data->width))
-		{
-			printf("%4d", data->z_data[i][j]);
-			j++;
-		}
-		printf("\n");
-		i++;
-	}
-}
-
 int main(int argc, char **argv)
 {
     t_fdf *data;
@@ -95,7 +67,6 @@ int main(int argc, char **argv)
 		ft_error("Error on memory allocation");
 	read_file(argv[1], data);
 	init_window(1200, 1200, data);
-	printf("width: %d, height %d\n", data->win_w, data->width);
 	data->mlx_ptr = mlx_init();
 	data->win_ptr = mlx_new_window(data->mlx_ptr, data->win_w, data->win_h, "FDF");
 	init_fdf(data);
