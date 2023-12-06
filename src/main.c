@@ -10,13 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../inc/fdf.h"
-
-void	init_window(int width, int height, t_fdf *data)
-{
-	data->win_w = width;
-	data->win_h = height;
-}
+#include "../inc/fdf.h"
 
 void	window_controls(int key, t_fdf *data)
 {
@@ -48,7 +42,6 @@ void	image_controls(int key, t_fdf *data)
 
 int	deal_key(int key, t_fdf *data)
 {
-	//ft_printf("key: %d\n", key);
 	if (key != 65307)
 		image_controls(key, data);
 	else
@@ -56,21 +49,22 @@ int	deal_key(int key, t_fdf *data)
 	return (0);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-    t_fdf *data;
+	t_fdf	*data;
 
 	if (argc != 2)
 		ft_error("Invalid number of arguments!");
-    data = (t_fdf*)malloc(sizeof(t_fdf));
+	data = (t_fdf*)malloc(sizeof(t_fdf));
 	if (!data)
 		ft_error("Error on memory allocation");
 	read_file(argv[1], data);
-	init_window(1200, 1200, data);
 	data->mlx_ptr = mlx_init();
-	data->win_ptr = mlx_new_window(data->mlx_ptr, data->win_w, data->win_h, "FDF");
+	data->win_ptr = mlx_new_window(data->mlx_ptr, 600, 600, "FDF");
 	init_fdf(data);
+	printf("ok\n");
 	draw(data);
+	printf("ok2\n");
 	mlx_key_hook(data->win_ptr, deal_key, data);
 	mlx_loop(data->mlx_ptr);
 	return (0);

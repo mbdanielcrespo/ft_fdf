@@ -44,11 +44,11 @@ void	set_steepness(int *z, int *z1, t_fdf *data)
 	*z1 *= data->steepness;
 }
 
-void	isometric(float *x, float *y, int z, t_fdf *data)
-{
-	*x = (*x - *y) * cos(0.8);
-	*y = (*x + *y) * sin(0.8) - z;
-}
+	void	isometric(float *x, float *y, int z)
+	{
+		*x = (*x - *y) * cos(0.8);
+		*y = (*x + *y) * sin(0.8) - z;
+	}
 
 void	breshenham(float x, float y, float x1, float y1, t_fdf *data)
 {
@@ -80,8 +80,8 @@ void	draw_line(float x, float y, float x1, float y1, t_fdf *data)
 	set_color(z, z1, data);
 	set_steepness(&z, &z1, data);
 	
-	isometric(&x, &y, z, data);
-	isometric(&x1, &y1, z1, data);
+	isometric(&x, &y, z);
+	isometric(&x1, &y1, z1);
 	
 	set_shift(&x, &y, &x1, &y1, data);
 	breshenham(x, y, x1, y1, data);

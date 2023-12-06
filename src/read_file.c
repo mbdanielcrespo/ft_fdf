@@ -12,9 +12,9 @@
 
 #include "../inc/fdf.h"
 
-int get_height(char *file_name)
+int	get_height(char *file_name)
 {
-	char    *line;
+	char	*line;
 	int		fd;
 	int		height;
 
@@ -29,15 +29,14 @@ int get_height(char *file_name)
 		height++;
 		free(line);
 	}
-	//free(line);
 	close(fd);
 	return (height);
 }
 
 int	get_width(char *file_name)
 {
-	int	width;
-	int	fd;
+	int		width;
+	int		fd;
 	char	*line;
 	char	**wrds;
 
@@ -66,7 +65,7 @@ int	get_width(char *file_name)
 void	fill_z_data(int	*z_line, char *line)
 {
 	char	**nums;
-	int	i;
+	int		i;
 
 	nums = ft_split(line, ' ');
 	i = 0;
@@ -81,9 +80,9 @@ void	fill_z_data(int	*z_line, char *line)
 
 void    read_file(char *file_name, t_fdf *data)
 {
-	int	i;
-	char *line;
-	int	fd;
+	int		i;
+	char	*line;
+	int		fd;
 	
 	i = 0;
 	data->height = get_height(file_name);
@@ -109,7 +108,7 @@ void    read_file(char *file_name, t_fdf *data)
 void	print_map(t_fdf *data)
 {
 	int	i;
-	int j;
+	int	j;
 
 	ft_printf("\nHeight: %d\n Width: %d\n", data->height, data->width);
 	i = 0;
