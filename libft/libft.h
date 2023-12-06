@@ -84,7 +84,7 @@ int		ft_putchar_fdp(t_i8 c, t_i32 fd);
 int		ft_putnbr_fdp(t_i32 n, t_i32 fd);
 int		ft_putstr_fdp(char *s, t_i32 fd);
 
-float		ft_abs(float a);
+float	ft_abs(float a);
 int		ft_max(int a, int b);
 int		ft_pow(int num, int pow);
 void	ft_swap(int *x, int *y);

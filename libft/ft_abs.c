@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "libft.h"
+#include "libft.h"
 
-float ft_abs(float a)
+float	ft_abs(float a)
 {
-    if (a < 0)
-        return (-a);
-    else
-        return (a);
+	if (a < 0)
+		return (-a);
+	else
+		return (a);
 }

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/fdf.h"
+#include "fdf.h"
 
 int	get_height(char *file_name)
 {
@@ -78,12 +78,12 @@ void	fill_z_data(int	*z_line, char *line)
 	free(nums);
 }
 
-void    read_file(char *file_name, t_fdf *data)
+void	read_file(char *file_name, t_fdf *data)
 {
 	int		i;
 	char	*line;
 	int		fd;
-	
+
 	i = 0;
 	data->height = get_height(file_name);
 	data->width = get_width(file_name);

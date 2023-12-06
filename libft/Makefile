@@ -1,4 +1,4 @@
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 SRC_FILES = ft_atoi.c ft_isascii.c ft_memcmp.c ft_putchar_fd.c ft_putstr_fd.c \

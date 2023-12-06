@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/fdf.h"
+#include "fdf.h"
 
 void	init_fdf(t_fdf *data)
 {
-	data->shift_x = data->win_w / 2;
-	data->shift_y = 0;
+	data->shift_x = 300;
+	data->shift_y = 300;
 	data->zoom = 25;
 	data->steepness = 1;
 }

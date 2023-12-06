@@ -6,104 +6,83 @@
 /*   By: danalmei <danalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 17:31:36 by danalmei          #+#    #+#             */
-/*   Updated: 2023/11/08 18:55:32 by danalmei         ###   ########.fr       */
+/*   Updated: 2023/12/06 16:24:57 by danalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../inc/fdf.h"
+#include "fdf.h"
 
-void	set_color(int z, int z1, t_fdf *data)
+void	breshenham(t_pt pt1, t_pt pt2, t_fdf *data)
 {
-	if (z < 0 || z1 < 0)
-		data->color = 0xe80c0c;
-	else if ((z > 0 || z1 > 0))
-		data->color = 0x008000;
-	else
-		data->color = 0xffffff;
-}
+	float	x_step;
+	float	y_step;
+	int		max;
 
-void	set_zoom(float *x, float *y, float *x1, float *y1, t_fdf *data)
-{
-	*x *= data->zoom;
-	*y *= data->zoom;
-	*x1 *= data->zoom;
-	*y1 *= data->zoom;
-}
-
-void	set_shift(float *x, float *y, float *x1, float *y1, t_fdf *data)
-{
-	*x += data->shift_x;
-	*y += data->shift_y;
-	*x1 += data->shift_x;
-	*y1 += data->shift_y;
-}
-
-void	set_steepness(int *z, int *z1, t_fdf *data)
-{
-	*z *= data->steepness;
-	*z1 *= data->steepness;
-}
-
-	void	isometric(float *x, float *y, int z)
-	{
-		*x = (*x - *y) * cos(0.8);
-		*y = (*x + *y) * sin(0.8) - z;
-	}
-
-void	breshenham(float x, float y, float x1, float y1, t_fdf *data)
-{
-	float x_step;
-	float y_step;
-	int max;
-
-	x_step = x1 - x;
-	y_step = y1 - y;
+	x_step = pt2.x - pt1.x;
+	y_step = pt2.y - pt1.y;
 	max = ft_max(ft_abs(x_step), ft_abs(y_step));
 	x_step /= max;
 	y_step /= max;
-	while ((int)(x - x1) || (int)(y - y1))
+	while ((int)(pt1.x - pt2.x) || (int)(pt1.y - pt2.y))
 	{
-		mlx_pixel_put(data->mlx_ptr, data->win_ptr, x, y, data->color);
-		x += x_step;
-		y += y_step;
+		//usleep(5000);
+		mlx_pixel_put(data->mlx_ptr, data->win_ptr, pt1.x, pt1.y, data->color);
+		pt1.x += x_step;
+		pt1.y += y_step;
 	}
 }
 
-void	draw_line(float x, float y, float x1, float y1, t_fdf *data)
+void	draw_line(t_pt pt1, t_pt pt2, t_fdf *data)
 {
 	int	z;
-	int z1;
+	int	z1;
 
-	z = data->z_data[(int)y][(int)x];
-	z1 = data->z_data[(int)y1][(int)x1];
-	set_zoom(&x, &y, &x1, &y1, data);
+	z = data->z_data[(int)pt1.y][(int)pt1.x];
+	z1 = data->z_data[(int)pt2.y][(int)pt2.x];
+	set_zoom(&pt1, &pt2, data);
 	set_color(z, z1, data);
 	set_steepness(&z, &z1, data);
-	
-	isometric(&x, &y, z);
-	isometric(&x1, &y1, z1);
-	
-	set_shift(&x, &y, &x1, &y1, data);
-	breshenham(x, y, x1, y1, data);
+	set_isometric(&pt1, z);
+	set_isometric(&pt2, z1);
+	set_shift(&pt1, &pt2, data);
+	breshenham(pt1, pt2, data);
+}
+
+void	draw2(t_pt *pt1, t_pt *pt2, t_pt *curr_pt, t_fdf *data)
+{
+	if (curr_pt->x < (data->width - 1))
+	{
+		pt1->x = curr_pt->x;
+		pt1->y = curr_pt->y;
+		pt2->x = curr_pt->x + 1;
+		pt2->y = curr_pt->y;
+		draw_line(*pt1, *pt2, data);
+	}
+	if (curr_pt->y < (data->height - 2))
+	{
+		pt1->x = curr_pt->x;
+		pt1->y = curr_pt->y;
+		pt2->x = curr_pt->x;
+		pt2->y = curr_pt->y + 1;
+		draw_line(*pt1, *pt2, data);
+	}
 }
 
 void	draw(t_fdf *data)
-{ 
-	int	x;
-	int	y;
+{
+	t_pt	curr_pt;
+	t_pt	pt1;
+	t_pt	pt2;
 
-	y = 0;
-	while (y < (data->height - 1))
+	curr_pt.y = 0;
+	while (curr_pt.y < (data->height - 1))
 	{
-		x = 0;
-		while (x < data->width)
+		curr_pt.x = 0;
+		while (curr_pt.x < data->width)
 		{
-			if (x < (data->width - 1))
-				draw_line(x, y, x + 1, y, data);
-			if (y < (data->height - 2))
-				draw_line(x, y, x, y + 1, data);
-			x++;
+			draw2(&pt1, &pt2, &curr_pt, data);
+			curr_pt.x++;
 		}
-		y++;
+		curr_pt.y++;
 	}
 }

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/fdf.h"
+#include "fdf.h"
 
 void	window_controls(int key, t_fdf *data)
 {
@@ -55,16 +55,14 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		ft_error("Invalid number of arguments!");
-	data = (t_fdf*)malloc(sizeof(t_fdf));
+	data = (t_fdf *)malloc(sizeof(t_fdf));
 	if (!data)
 		ft_error("Error on memory allocation");
 	read_file(argv[1], data);
 	data->mlx_ptr = mlx_init();
 	data->win_ptr = mlx_new_window(data->mlx_ptr, 600, 600, "FDF");
 	init_fdf(data);
-	printf("ok\n");
 	draw(data);
-	printf("ok2\n");
 	mlx_key_hook(data->win_ptr, deal_key, data);
 	mlx_loop(data->mlx_ptr);
 	return (0);
