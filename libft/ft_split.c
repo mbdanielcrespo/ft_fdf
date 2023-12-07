@@ -23,7 +23,7 @@ static t_i32	ft_count_words(char const *s, char ch)
 		return (1);
 	while (s[c] != '\0')
 	{
-		while (s[c] == ch)
+		while (s[c] == ch && s[c])
 			c++;
 		if (s[c] != '\0')
 			w++;

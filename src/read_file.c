@@ -20,7 +20,7 @@ int	get_height(char *file_name)
 
 	height = 0;
 	fd = open(file_name, O_RDONLY, 0);
-	if (!fd)
+	if (fd < 0)
 		return (-1);
 	line = "init";
 	while (line != NULL)
@@ -42,7 +42,7 @@ int	get_width(char *file_name)
 
 	width = 0;
 	fd = open(file_name, O_RDONLY, 0);
-	if (!fd)
+	if (fd < 0)
 		return (-1);
 	line = get_next_line(fd);
 	wrds = ft_split(line, ' ');
@@ -89,7 +89,7 @@ void	read_file(char *file_name, t_fdf *data)
 	data->width = get_width(file_name);
 	data->z_data = (int **)malloc(sizeof(int *) * (data->height));
 	while (i < data->height - 1)
-		data->z_data[i++] = (int *)malloc((sizeof(int) * (data->width + 1)));
+		data->z_data[i++] = (int *)malloc((sizeof(int) * (data->width + 2)));
 	i = 0;
 	fd = open(file_name, O_RDONLY, 0);
 	line = get_next_line(fd);

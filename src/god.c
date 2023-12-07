@@ -14,15 +14,17 @@
 
 void	init_fdf(t_fdf *data)
 {
-	data->shift_x = 300;
-	data->shift_y = 300;
+	data->shift_x = 300;//data->w_h - data->w_h/2;
+	data->shift_y = 300;//data->w_w - data->w_w/2;
 	data->zoom = 25;
-	data->steepness = 1;
+	data->steepness = 3;
 	data->projection = 'i';
 }
 
 void	destroy_mlx(t_fdf *data)
 {
+	if (data->img_data.img)
+		mlx_destroy_image(data->mlx_ptr, data->img_data.img);
 	if (data->win_ptr)
 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	if (data->mlx_ptr)

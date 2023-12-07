@@ -1,7 +1,7 @@
 NAME = fdf
 CC = cc
 RM = rm -f
-CFLAGS = -Wall -Werror -Wextra -g -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra #-g -fsanitize=address
 INC_FLAGS = -I ./inc/ -I .minilibx-linux/ -I ./libft/
 
 MLX = .minilibx-linux/libmlx.a
@@ -11,7 +11,8 @@ SRC = src/main.c \
 src/read_file.c \
 src/draw.c \
 src/god.c \
-src/setters.c
+src/setters.c \
+src/projections.c
 
 LIBFT = libft/libft.a
 

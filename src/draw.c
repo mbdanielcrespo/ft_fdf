@@ -6,7 +6,7 @@
 /*   By: danalmei <danalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 17:31:36 by danalmei          #+#    #+#             */
-/*   Updated: 2023/12/06 16:24:57 by danalmei         ###   ########.fr       */
+/*   Updated: 2023/12/07 15:22:57 by danalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ void	breshenham(t_pt pt1, t_pt pt2, t_fdf *data)
 	y_step /= max;
 	while ((int)(pt1.x - pt2.x) || (int)(pt1.y - pt2.y))
 	{
-		//usleep(5000);
-		mlx_pixel_put(data->mlx_ptr, data->win_ptr, pt1.x, pt1.y, data->color);
+		my_mlx_pixel_put(&(data->img_data), pt1.x, pt1.y, data->color);
 		pt1.x += x_step;
 		pt1.y += y_step;
 	}
@@ -40,11 +39,11 @@ void	draw_line(t_pt pt1, t_pt pt2, t_fdf *data)
 
 	z = data->z_data[(int)pt1.y][(int)pt1.x];
 	z1 = data->z_data[(int)pt2.y][(int)pt2.x];
-	zpt->x = z;
-	zpt->y = z1;
 	set_zoom(&pt1, &pt2, data);
 	set_color(z, z1, data);
 	set_steepness(&z, &z1, data);
+	zpt.x = z;
+	zpt.y = z1;
 	projection(&pt1, &pt2, zpt, data);
 	set_shift(&pt1, &pt2, data);
 	breshenham(pt1, pt2, data);

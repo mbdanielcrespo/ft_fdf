@@ -6,7 +6,7 @@
 /*   By: danalmei <danalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 15:08:31 by danalmei          #+#    #+#             */
-/*   Updated: 2023/12/06 16:15:36 by danalmei         ###   ########.fr       */
+/*   Updated: 2023/12/07 17:12:02 by danalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,18 @@
 
 void	set_color(int z, int z1, t_fdf *data)
 {
-	if (z < 0 || z1 < 0)
-		data->color = 0xe80c0c;
-	else if ((z > 0 || z1 > 0))
-		data->color = 0x008000;
+	if (z < -500 || z1 < -500)
+		data->color = 0x000000;
+	else if ((z < -300 || z1 < -300))
+		data->color = 0x811212;
+	else if ((z < -100 || z1 < -100))
+		data->color = 0xe02424;
+	else if ((z == 0 || z1 == 0))
+		data->color = 0xdb4e1f;
+	else if ((z > 20 || z1 > 20))
+		data->color = 0xeeb91b;
+	else if ((z > 50 || z1 > 50))
+		data->color = 0xfff675;
 	else
 		data->color = 0xffffff;
 }
@@ -42,10 +50,4 @@ void	set_steepness(int *z, int *z1, t_fdf *data)
 {
 	*z *= data->steepness;
 	*z1 *= data->steepness;
-}
-
-void	set_isometric(t_pt *p, int z)
-{
-	p->x = (p->x - p->y) * cos(0.8);
-	p->y = (p->x + p->y) * sin(0.8) - z;
 }
