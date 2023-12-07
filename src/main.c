@@ -42,6 +42,7 @@ void	image_controls(int key, t_fdf *data)
 
 int	deal_key(int key, t_fdf *data)
 {
+	printf("%d\n", key);
 	if (key != 65307)
 		image_controls(key, data);
 	else

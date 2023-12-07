@@ -36,14 +36,16 @@ void	draw_line(t_pt pt1, t_pt pt2, t_fdf *data)
 {
 	int	z;
 	int	z1;
+	t_pt zpt;
 
 	z = data->z_data[(int)pt1.y][(int)pt1.x];
 	z1 = data->z_data[(int)pt2.y][(int)pt2.x];
+	zpt->x = z;
+	zpt->y = z1;
 	set_zoom(&pt1, &pt2, data);
 	set_color(z, z1, data);
 	set_steepness(&z, &z1, data);
-	set_isometric(&pt1, z);
-	set_isometric(&pt2, z1);
+	projection(&pt1, &pt2, zpt, data);
 	set_shift(&pt1, &pt2, data);
 	breshenham(pt1, pt2, data);
 }

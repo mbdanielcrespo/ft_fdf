@@ -18,6 +18,7 @@ void	init_fdf(t_fdf *data)
 	data->shift_y = 300;
 	data->zoom = 25;
 	data->steepness = 1;
+	data->projection = 'i';
 }
 
 void	destroy_mlx(t_fdf *data)

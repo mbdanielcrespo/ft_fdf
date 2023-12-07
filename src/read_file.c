@@ -59,7 +59,7 @@ int	get_width(char *file_name)
 	free(line);
 	free(wrds);
 	close(fd);
-	return (width - 1);
+	return (width);
 }
 
 void	fill_z_data(int	*z_line, char *line)
@@ -117,10 +117,10 @@ void	print_map(t_fdf *data)
 		j = 0;
 		while (j < (data->width))
 		{
-			printf("%4d", data->z_data[i][j]);
+			printf("%3d ", data->z_data[i][j]);
 			j++;
 		}
-		printf("\n");
+		ft_printf("\n");
 		i++;
 	}
 }
