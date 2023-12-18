@@ -12,21 +12,15 @@
 
 #include "fdf.h"
 
-void	init_fdf(t_fdf *data)
-{
-	data->shift_x = 300;//data->w_h - data->w_h/2;
-	data->shift_y = 300;//data->w_w - data->w_w/2;
-	data->zoom = 25;
-	data->steepness = 3;
-	data->projection = 'i';
-}
-
 void	destroy_mlx(t_fdf *data)
 {
 	if (data->img_data.img)
 		mlx_destroy_image(data->mlx_ptr, data->img_data.img);
 	if (data->win_ptr)
+	{
 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+		data->win_ptr = NULL;
+	}
 	if (data->mlx_ptr)
 	{
 		mlx_destroy_display(data->mlx_ptr);
@@ -50,35 +44,25 @@ void	free_strs(char **strs)
 	}
 }
 
-void	destroy_fdf(t_fdf *data)
+void	free_arr(int **arr)
 {
 	int	i;
 
 	i = 0;
+	while (arr[i])
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
+}
+
+void	destroy_fdf(t_fdf *data)
+{
 	if (data)
 	{
-		if (data->z_data)
-		{
-			if (data->z_data[i])
-			{
-				while (data->z_data[i])
-				{
-					free(data->z_data[i]);
-					i++;
-				}
-			}
-			free(data->z_data);
-			i = 0;
-			if (data->color_map[i])
-			{
-				while (data->color_map[i])
-				{
-					free(data->color_map[i]);
-					i++;
-				}
-			}
-			free(data->color_map);
-		}
+		free_arr(data->z_data);
+		free_arr(data->color_map);
 		free(data);
 	}
 }

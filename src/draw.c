@@ -12,46 +12,47 @@
 
 #include "fdf.h"
 
-int interpolate(int start, int end, float ratio) {
-    return (int)(start + ((end - start) * ratio));
-}
-
-int get_color(float ratio, int col_start, int col_end)
+void	clear_image(t_fdf *data, int color)
 {
-	int r;
-	int g;
-	int b;
+    int	x;
+	int	y;
 
-	r = interpolate((col_start >> 16) & 0xFF, (col_end >> 16) & 0xFF, ratio);
-    g = interpolate((col_start >> 8) & 0xFF, (col_end >> 8) & 0xFF, ratio);
-    b = interpolate(col_start & 0xFF, col_end & 0xFF, ratio);
-	return (r << 16) | (g << 8) | b;
+	y = 0;
+	mlx_clear_window(data->mlx_ptr, data->win_ptr);
+    while (y < 600)
+	{
+		x = 0;
+        while (x < 600)
+		{
+            my_mlx_pixel_put(&(data->img_data), x, y, color);
+			x++;
+        }
+		y++;
+    }
 }
 
 void	breshenham(t_pt pt1, t_pt pt2, t_fdf *data, t_pt color)
 {
 	float	x_step;
 	float	y_step;
-	int		max;
 	float	ratio;
-	float	progress;
+	int		max;
+	int	c;
 
+	c = 0;
 	ratio = 0;
-	progress = 0;
 	x_step = pt2.x - pt1.x;
 	y_step = pt2.y - pt1.y;
 	max = ft_max(ft_abs(x_step), ft_abs(y_step));
-	printf("Color a: %d, Color b: %d\n", (int)color.x, (int)color.y);
 	x_step /= max;
 	y_step /= max;
 	while ((int)(pt1.x - pt2.x) || (int)(pt1.y - pt2.y))
 	{
-		ratio = progress / max / 10;
-		printf("Ratio: %f\n", ratio);
+		ratio = (float)c / max;
 		my_mlx_pixel_put(&(data->img_data), pt1.x, pt1.y, get_color(ratio, color.x, color.y));
 		pt1.x += x_step;
 		pt1.y += y_step;
-		progress += sqrt(pow(pt1.x - pt2.x, 2) + pow(pt1.y - pt2.y, 2));
+		c++;
 	}
 }
 

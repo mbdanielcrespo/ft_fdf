@@ -12,6 +12,22 @@
 
 #include "fdf.h"
 
+void	init_fdf(char *file_name, t_fdf *data)
+{
+	read_file(file_name, data);
+	read_color(file_name, data);
+	data->shift_x = 300;
+	data->shift_y = 300;
+	data->zoom = 25;
+	data->steepness = 3;
+	data->projection = 'i';
+}
+
+int interpolate(int start, int end, float ratio)
+{
+    return (int)(start + ((end - start) * ratio));
+}
+
 void	set_isometric(t_pt *p, int z)
 {
 	p->x = (p->x - p->y) * cos(0.8);

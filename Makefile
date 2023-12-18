@@ -12,7 +12,8 @@ src/read_file.c \
 src/draw.c \
 src/god.c \
 src/setters.c \
-src/projections.c
+src/projections.c \
+src/color.c
 
 LIBFT = libft/libft.a
 
