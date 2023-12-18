@@ -109,6 +109,9 @@ int	main(int argc, char **argv)
 	if (invalid_read(argv[1]))
 		ft_error("Invalid read of arguments!");
 	read_file(argv[1], data);
+	read_color(argv[1], data);
+	print_map(data);
+	print_color_map(data);
 	init_fdf(data);
 	//init_mlx_window_size(600, 600, data);
 	data->mlx_ptr = mlx_init();

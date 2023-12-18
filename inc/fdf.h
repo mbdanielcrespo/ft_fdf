@@ -39,6 +39,7 @@ typedef struct s_fdf
 	int		width;
 	int		height;
 	int		**z_data;
+	int		**color_map;
 	int		zoom;
 	int		color;
 	int		steepness;
@@ -62,15 +63,17 @@ void	set_isometric(t_pt *p, int z);
 void	set_parallel(t_pt *p, int z);
 void	projection(t_pt *pt1, t_pt *pt2, t_pt zpt, t_fdf *data);
 // Draw algo
-void	breshenham(t_pt pt1, t_pt pt2, t_fdf *data);
 void	read_file(char *file_name, t_fdf *data);
+void	read_color(char *file_name, t_fdf *data);
 void	draw(t_fdf *data);
 int		ft_max(int a, int b);
 float	ft_abs(float a);
 void	init_fdf(t_fdf *data);
 void	print_map(t_fdf *data);
+void	print_color_map(t_fdf *data);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 // GOD file
+void	free_strs(char **strs);
 void	destroy_mlx(t_fdf *data);
 void	destroy_fdf(t_fdf *data);
 void	destroy_all(t_fdf *data);

@@ -5,7 +5,7 @@ CFLAGS = -Wall -Werror -Wextra #-g -fsanitize=address
 INC_FLAGS = -I ./inc/ -I .minilibx-linux/ -I ./libft/
 
 MLX = .minilibx-linux/libmlx.a
-MLX_FLAGS = -L.minilibx-linux -Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+MLX_FLAGS = -L.minilibx-linux -Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm #-lz
 
 SRC = src/main.c \
 src/read_file.c \

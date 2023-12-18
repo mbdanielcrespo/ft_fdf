@@ -34,6 +34,22 @@ void	destroy_mlx(t_fdf *data)
 	}
 }
 
+void	free_strs(char **strs)
+{
+	int	c;
+
+	c = 0;
+	if (strs)
+	{
+		while (strs[c])
+		{
+			free(strs[c]);
+			c++;
+		}
+		free(strs);
+	}
+}
+
 void	destroy_fdf(t_fdf *data)
 {
 	int	i;
@@ -52,6 +68,16 @@ void	destroy_fdf(t_fdf *data)
 				}
 			}
 			free(data->z_data);
+			i = 0;
+			if (data->color_map[i])
+			{
+				while (data->color_map[i])
+				{
+					free(data->color_map[i]);
+					i++;
+				}
+			}
+			free(data->color_map);
 		}
 		free(data);
 	}

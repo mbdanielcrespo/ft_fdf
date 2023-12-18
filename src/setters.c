@@ -12,24 +12,6 @@
 
 #include "fdf.h"
 
-void	set_color(int z, int z1, t_fdf *data)
-{
-	if (z < -500 || z1 < -500)
-		data->color = 0x000000;
-	else if ((z < -300 || z1 < -300))
-		data->color = 0x811212;
-	else if ((z < -100 || z1 < -100))
-		data->color = 0xe02424;
-	else if ((z == 0 || z1 == 0))
-		data->color = 0xdb4e1f;
-	else if ((z > 20 || z1 > 20))
-		data->color = 0xeeb91b;
-	else if ((z > 50 || z1 > 50))
-		data->color = 0xfff675;
-	else
-		data->color = 0xffffff;
-}
-
 void	set_zoom(t_pt *pt1, t_pt *pt2, t_fdf *data)
 {
 	pt1->x *= data->zoom;
