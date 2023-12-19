@@ -6,40 +6,22 @@
 /*   By: danalmei <danalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 12:13:10 by danalmei          #+#    #+#             */
-/*   Updated: 2023/12/19 12:23:45 by danalmei         ###   ########.fr       */
+/*   Updated: 2023/12/19 14:59:26 by danalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	hex_char_to_int(char c)
+int	get_color(float ratio, int col_start, int col_end)
 {
-	if (c >= '0' && c <= '9') 
-		return (c - '0');
-	if (c >= 'a' && c <= 'f')
-		return (c - 'a' + 10);
-	if (c >= 'A' && c <= 'F')
-		return (c - 'A' + 10);
-	return (0);
-}
+	int	r;
+	int	g;
+	int	b;
 
-int	hex_to_int(char *hex_str)
-{
-	int	i;
-	int	base;
-	int	res;
-
-	i = 0;
-	base = 1;
-	res = 0;
-	while (hex_str[i])
-		i++;
-	while (--i >= 2)
-	{
-		res += hex_char_to_int(hex_str[i]) * base;
-		base *= 16;
-	}
-	return (res);
+	r = interpolate((col_start >> 16) & 0xFF, (col_end >> 16) & 0xFF, ratio);
+	g = interpolate((col_start >> 8) & 0xFF, (col_end >> 8) & 0xFF, ratio);
+	b = interpolate(col_start & 0xFF, col_end & 0xFF, ratio);
+	return ((r << 16) | (g << 8) | b);
 }
 
 void	fill_color_map(int *col_line, char *line)

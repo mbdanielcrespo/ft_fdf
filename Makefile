@@ -13,7 +13,9 @@ src/draw.c \
 src/god.c \
 src/setters.c \
 src/projections.c \
-src/color.c
+src/color.c \
+src/init.c \
+src/utils.c
 
 LIBFT = libft/libft.a
 

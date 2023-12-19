@@ -6,16 +6,11 @@
 /*   By: danalmei <danalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 11:46:10 by danalmei          #+#    #+#             */
-/*   Updated: 2023/12/19 12:57:56 by danalmei         ###   ########.fr       */
+/*   Updated: 2023/12/19 15:01:01 by danalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-int	interpolate(int start, int end, float ratio)
-{
-	return ((int)(start + ((end - start) * ratio)));
-}
 
 void	set_isometric(t_pt *p, int z)
 {
