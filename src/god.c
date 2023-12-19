@@ -24,7 +24,7 @@ void	destroy_mlx(t_fdf *data)
 	if (data->mlx_ptr)
 	{
 		mlx_destroy_display(data->mlx_ptr);
-		data->mlx_ptr = NULL;
+		free(data->mlx_ptr);
 	}
 }
 

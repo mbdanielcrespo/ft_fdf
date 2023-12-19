@@ -26,7 +26,7 @@ typedef struct s_pt
 	float	y;
 }	t_pt;
 
-typedef struct	s_data {
+typedef struct s_data {
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
@@ -50,11 +50,11 @@ typedef struct s_fdf
 	void	*win_ptr;
 }				t_fdf;
 
-
+//Init
+void	init_fdf(char *file_name, t_fdf *data);
 // Main
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	clear_image(t_fdf *data, int color);
-
 // Seters
 void	image_controls(int key, t_fdf *data);
 int		get_color(float ratio, int col_start, int col_end);
@@ -62,7 +62,6 @@ void	set_zoom(t_pt *pt1, t_pt *pt2, t_fdf *data);
 void	set_shift(t_pt *pt1, t_pt *pt2, t_fdf *data);
 void	set_steepness(int *z, int *z1, t_fdf *data);
 // Projection
-void	init_fdf(char *file_name, t_fdf *data);
 int		interpolate(int start, int end, float ratio);
 void	set_isometric(t_pt *p, int z);
 void	set_parallel(t_pt *p, int z);
@@ -72,7 +71,6 @@ void	breshenham(t_pt pt1, t_pt pt2, t_fdf *data, t_pt color);
 void	draw_line(t_pt pt1, t_pt pt2, t_fdf *data);
 void	draw2(t_pt *pt1, t_pt *pt2, t_pt *curr_pt, t_fdf *data);
 void	draw(t_fdf *data);
-
 // ZDataRead
 int		get_height(char *file_name);
 int		get_width(char *file_name);

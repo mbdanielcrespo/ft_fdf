@@ -25,7 +25,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	if (x < 0 || y < 0 || x > 600 || y > 600)
 		return ;
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	*(unsigned int *)dst = color;
 }
 
 int	deal_key(int key, t_fdf *data)
@@ -54,17 +54,18 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		ft_error("Invalid number of arguments!");
+	if (invalid_read(argv[1]))
+		ft_error("Invalid read of arguments!");
 	data = (t_fdf *)malloc(sizeof(t_fdf));
 	if (!data)
 		ft_error("Error on memory allocation");
-	if (invalid_read(argv[1]))
-		ft_error("Invalid read of arguments!");
 	init_fdf(argv[1], data);
 	ft_printf("Opening window ...\n");
 	data->mlx_ptr = mlx_init();
 	data->win_ptr = mlx_new_window(data->mlx_ptr, 600, 600, "FDF");
 	img.img = mlx_new_image(data->mlx_ptr, 600, 600);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
+	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
+			&img.line_length, &img.endian);
 	data->img_data = img;
 	draw(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, img.img, 0, 0);

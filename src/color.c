@@ -1,42 +1,52 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   color.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: danalmei <danalmei@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/19 12:13:10 by danalmei          #+#    #+#             */
+/*   Updated: 2023/12/19 12:23:45 by danalmei         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "fdf.h"
 
-int hex_char_to_int(char c)
+int	hex_char_to_int(char c)
 {
-    if (c >= '0' && c <= '9') 
-        return c - '0';
-    if (c >= 'a' && c <= 'f')
-        return c - 'a' + 10;
-    if (c >= 'A' && c <= 'F')
-        return c - 'A' + 10;
-    return 0;
+	if (c >= '0' && c <= '9') 
+		return (c - '0');
+	if (c >= 'a' && c <= 'f')
+		return (c - 'a' + 10);
+	if (c >= 'A' && c <= 'F')
+		return (c - 'A' + 10);
+	return (0);
 }
 
-int hex_to_int(char *hex_str)
+int	hex_to_int(char *hex_str)
 {
-    int i;
-	int base;
+	int	i;
+	int	base;
 	int	res;
 
-    i = 0;
-    base = 1;
-    res = 0;
-    while (hex_str[i])
-        i++;
-    while (--i >= 2)
+	i = 0;
+	base = 1;
+	res = 0;
+	while (hex_str[i])
+		i++;
+	while (--i >= 2)
 	{
-        res += hex_char_to_int(hex_str[i]) * base;
-        base *= 16;
-    }
-    return (res);
+		res += hex_char_to_int(hex_str[i]) * base;
+		base *= 16;
+	}
+	return (res);
 }
 
 void	fill_color_map(int *col_line, char *line)
 {
-	char **nums;
-	char **num;
-	int i;
+	char	**nums;
+	char	**num;
+	int		i;
 
 	nums = ft_split(line, ' ');
 	i = 0;
@@ -56,9 +66,9 @@ void	fill_color_map(int *col_line, char *line)
 
 void	read_color(char *file_name, t_fdf *data)
 {
-	int	i;
+	int		i;
 	char	*line;
-	int fd;
+	int		fd;
 
 	i = 0;
 	data->color_map = (int **)malloc(sizeof(int *) * (data->height));

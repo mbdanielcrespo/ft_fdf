@@ -6,7 +6,7 @@
 /*   By: danalmei <danalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 17:31:36 by danalmei          #+#    #+#             */
-/*   Updated: 2023/12/07 15:22:57 by danalmei         ###   ########.fr       */
+/*   Updated: 2023/12/19 12:24:33 by danalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 void	clear_image(t_fdf *data, int color)
 {
-    int	x;
+	int	x;
 	int	y;
 
 	y = 0;
 	mlx_clear_window(data->mlx_ptr, data->win_ptr);
-    while (y < 600)
+	while (y < 600)
 	{
 		x = 0;
-        while (x < 600)
+		while (x < 600)
 		{
-            my_mlx_pixel_put(&(data->img_data), x, y, color);
+			my_mlx_pixel_put(&(data->img_data), x, y, color);
 			x++;
-        }
+		}
 		y++;
-    }
+	}
 }
 
 void	breshenham(t_pt pt1, t_pt pt2, t_fdf *data, t_pt color)
@@ -37,7 +37,7 @@ void	breshenham(t_pt pt1, t_pt pt2, t_fdf *data, t_pt color)
 	float	y_step;
 	float	ratio;
 	int		max;
-	int	c;
+	int		c;
 
 	c = 0;
 	ratio = 0;
@@ -49,7 +49,8 @@ void	breshenham(t_pt pt1, t_pt pt2, t_fdf *data, t_pt color)
 	while ((int)(pt1.x - pt2.x) || (int)(pt1.y - pt2.y))
 	{
 		ratio = (float)c / max;
-		my_mlx_pixel_put(&(data->img_data), pt1.x, pt1.y, get_color(ratio, color.x, color.y));
+		my_mlx_pixel_put(&(data->img_data), pt1.x, pt1.y, 
+			get_color(ratio, color.x, color.y));
 		pt1.x += x_step;
 		pt1.y += y_step;
 		c++;
@@ -58,10 +59,10 @@ void	breshenham(t_pt pt1, t_pt pt2, t_fdf *data, t_pt color)
 
 void	draw_line(t_pt pt1, t_pt pt2, t_fdf *data)
 {
-	int	z;
-	int	z1;
-	t_pt zpt;
-	t_pt color;
+	int		z;
+	int		z1;
+	t_pt	zpt;
+	t_pt	color;
 
 	z = data->z_data[(int)pt1.y][(int)pt1.x];
 	z1 = data->z_data[(int)pt2.y][(int)pt2.x];
