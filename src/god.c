@@ -12,6 +12,14 @@
 
 #include "fdf.h"
 
+/**
+ * @code 
+ * void destroy_mlx(t_fdf *data);
+ * @endcond
+ * @brief Frees the memory allocated for the MiniLibX window and image data.
+ * @param *data Pointer to the FDF data structure containing MLX pointers.
+ * @return (void) Resources Freed.
+ */
 void	destroy_mlx(t_fdf *data)
 {
 	if (data->img_data.img)
@@ -28,6 +36,14 @@ void	destroy_mlx(t_fdf *data)
 	}
 }
 
+/**
+ * @code 
+ * void free_strs(char **strs);
+ * @endcond
+ * @brief Frees an array of strings.
+ * @param **strs Pointer to an array of strings to be freed.
+ * @return (void) Array Freed.
+ */
 void	free_strs(char **strs)
 {
 	int	c;
@@ -44,6 +60,14 @@ void	free_strs(char **strs)
 	}
 }
 
+/**
+ * @code 
+ * void free_arr(int **arr);
+ * @endcond
+ * @brief Frees a two-dimensional integer array.
+ * @param **arr Pointer to the two-dimensional array to be freed.
+ * @return (void) Array Freed.
+ */
 void	free_arr(int **arr)
 {
 	int	i;
@@ -57,6 +81,14 @@ void	free_arr(int **arr)
 	free(arr);
 }
 
+/**
+ * @code 
+ * void destroy_fdf(t_fdf *data);
+ * @endcond
+ * @brief Frees the memory allocated for the FDF structure, including arrays for z data and color map.
+ * @param *data Pointer to the FDF data structure to be freed.
+ * @return (void) Data Freed.
+ */
 void	destroy_fdf(t_fdf *data)
 {
 	if (data)
@@ -67,6 +99,15 @@ void	destroy_fdf(t_fdf *data)
 	}
 }
 
+/**
+ * @code 
+ * void destroy_all(t_fdf *data);
+ * @endcond
+ * @brief Frees all allocated memory and resources associated with the FDF program.
+ * @brief Calls destroy_mlx and destroy_fdf functions, then exits the program.
+ * @param *data Pointer to the FDF data structure.
+ * @return (void) All Resources Freed.
+ */
 void	destroy_all(t_fdf *data)
 {
 	destroy_mlx(data);

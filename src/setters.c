@@ -6,12 +6,25 @@
 /*   By: danalmei <danalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 15:08:31 by danalmei          #+#    #+#             */
-/*   Updated: 2023/12/19 14:59:40 by danalmei         ###   ########.fr       */
+/*   Updated: 2023/12/20 18:45:05 by danalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+/**
+ * @code 
+ * void	image_controls(int key, t_fdf *data);
+ * @endcond
+ * @brief This function updates structures values based on the pessed keys \
+ * @brief altering the value; clears the image by overwriting the values with \
+ * @brief pixels and finally redraws the image with the updated values and puts \
+ * @brief the drawing to the window.
+ * @param *pt1 Pointer to the 1st point.
+ * @param *pt2 Pointer to the 2nd point.
+ * @param *data Pointer to the data structure.
+ * @return (void).
+ */
 void	image_controls(int key, t_fdf *data)
 {
 	if (key == 65361)
@@ -40,6 +53,16 @@ void	image_controls(int key, t_fdf *data)
 		data->img_data.img, 0, 0);
 }
 
+/**
+ * @code
+ * void	set_zoom(t_pt *pt1, t_pt *pt2, t_fdf *data);
+ * @endcond
+ * @brief This function updates the zoom values after they've been altered.
+ * @param *pt1 Pointer to the 1st point.
+ * @param *pt2 Pointer to the 2nd point.
+ * @param *data Pointer to the data structure.
+ * @return (void).
+ */
 void	set_zoom(t_pt *pt1, t_pt *pt2, t_fdf *data)
 {
 	pt1->x *= data->zoom;
@@ -48,6 +71,14 @@ void	set_zoom(t_pt *pt1, t_pt *pt2, t_fdf *data)
 	pt2->y *= data->zoom;
 }
 
+/**
+ * @brief This function updates the shift X and Y values after they've \
+ * @brief altered.
+ * @param *pt1 Pointer to the 1st point.
+ * @param *pt2 Pointer to the 2nd point.
+ * @param *data Pointer to the data structure.
+ * @return (void).
+ */
 void	set_shift(t_pt *pt1, t_pt *pt2, t_fdf *data)
 {
 	pt1->x += data->shift_x;
@@ -56,6 +87,13 @@ void	set_shift(t_pt *pt1, t_pt *pt2, t_fdf *data)
 	pt2->y += data->shift_y;
 }
 
+/**
+ * @brief This function updates the z values after they've been altered.
+ * @param *z Pointer to the height of point 1.
+ * @param *z1 Pointer to the height of point 2.
+ * @param *data Pointer to the data structure.
+ * @return (void).
+ */
 void	set_steepness(int *z, int *z1, t_fdf *data)
 {
 	*z *= data->steepness;

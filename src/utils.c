@@ -6,12 +6,21 @@
 /*   By: danalmei <danalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:53:10 by danalmei          #+#    #+#             */
-/*   Updated: 2023/12/19 15:01:05 by danalmei         ###   ########.fr       */
+/*   Updated: 2023/12/20 18:57:51 by danalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+/**
+ * @code 
+ * int hex_char_to_int(char c);
+ * @endcond
+ * @brief Converts a single hexadecimal character to its integer equivalent. \
+ * @brief If the character is not a valid hexadecimal character, it returns 0.
+ * @param c Character representing a hexadecimal digit (0-9, a-f, A-F).
+ * @return (int) Digit Value.
+ */
 int	hex_char_to_int(char c)
 {
 	if (c >= '0' && c <= '9') 
@@ -23,6 +32,15 @@ int	hex_char_to_int(char c)
 	return (0);
 }
 
+/**
+ * @code 
+ * int hex_to_int(char *hex_str);
+ * @endcond
+ * @brief Converts a hexadecimal string to its integer equivalent. \
+ * @brief Assumes that the string is a valid hexadecimal number.
+ * @param *hex_str Pointer to a string representing a hexadecimal number.
+ * @return (int) Number Value.
+ */
 int	hex_to_int(char *hex_str)
 {
 	int	i;
@@ -42,6 +60,16 @@ int	hex_to_int(char *hex_str)
 	return (res);
 }
 
+/**
+ * @code 
+ * int interpolate(int start, int end, float ratio);
+ * @endcond
+ * @brief Calculates linear interpolation between two values.
+ * @param start Starting integer value for interpolation.
+ * @param end Ending integer value for interpolation.
+ * @param ratio Floating-point value between 0.0 and 1.0 indicating interpolation ratio.
+ * @return (int) Interpolated Value.
+ */
 int	interpolate(int start, int end, float ratio)
 {
 	return ((int)(start + ((end - start) * ratio)));

@@ -12,6 +12,15 @@
 
 #include "fdf.h"
 
+/**
+ * @code 
+ * int get_height(char *file_name);
+ * @endcond
+ * @brief Counts the number of lines in a file, representing the \
+ * @brief of the map.
+ * @param *file_name Pointer to the name of the file.
+ * @return (int) Line Count.
+ */
 int	get_height(char *file_name)
 {
 	char	*line;
@@ -33,6 +42,15 @@ int	get_height(char *file_name)
 	return (height);
 }
 
+/**
+ * @code 
+ * int get_width(char *file_name);
+ * @endcond
+ * @brief Determines the number of words in the first line of the file, \
+ * @brief the width of the map.
+ * @param *file_name Pointer to the name of the file.
+ * @return (int) Word Count.
+ */
 int	get_width(char *file_name)
 {
 	int		width;
@@ -62,6 +80,16 @@ int	get_width(char *file_name)
 	return (width);
 }
 
+
+/**
+ * @code 
+ * void fill_z_data(int *z_line, char *line);
+ * @endcond
+ * @brief Fills an array with integer values converted from a string split by spaces.
+ * @param *z_line Pointer to an array of integers to store the converted numbers.
+ * @param *line Pointer to the string to be split and converted.
+ * @return (void).
+ */
 void	fill_z_data(int	*z_line, char *line)
 {
 	char	**nums;
@@ -78,6 +106,15 @@ void	fill_z_data(int	*z_line, char *line)
 	free(nums);
 }
 
+/**
+ * @code 
+ * void read_file(char *file_name, t_fdf *data);
+ * @endcond
+ * @brief Reads the map file and fills the data structure with height, width, and z values.
+ * @param *file_name Pointer to the name of the file.
+ * @param *data Pointer to the data structure to be filled.
+ * @return (void).
+ */
 void	read_file(char *file_name, t_fdf *data)
 {
 	int		i;
@@ -105,6 +142,14 @@ void	read_file(char *file_name, t_fdf *data)
 	close(fd);
 }
 
+/**
+ * @code 
+ * void print_map(t_fdf *data);
+ * @endcond
+ * @brief Prints the map data to the console, showing the height, width, and z values.
+ * @param *data Pointer to the data structure containing the map information.
+ * @return (void).
+ */
 void	print_map(t_fdf *data)
 {
 	int	i;
