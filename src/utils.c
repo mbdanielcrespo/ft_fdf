@@ -6,7 +6,7 @@
 /*   By: danalmei <danalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:53:10 by danalmei          #+#    #+#             */
-/*   Updated: 2023/12/20 18:57:51 by danalmei         ###   ########.fr       */
+/*   Updated: 2023/12/21 14:42:40 by danalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	hex_to_int(char *hex_str)
  * @brief Calculates linear interpolation between two values.
  * @param start Starting integer value for interpolation.
  * @param end Ending integer value for interpolation.
- * @param ratio Floating-point value between 0.0 and 1.0 indicating interpolation ratio.
+ * @param ratio Floating-point between 0.0 and 1.0 Interpolation ratio.
  * @return (int) Interpolated Value.
  */
 int	interpolate(int start, int end, float ratio)

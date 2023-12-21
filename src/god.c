@@ -85,7 +85,8 @@ void	free_arr(int **arr)
  * @code 
  * void destroy_fdf(t_fdf *data);
  * @endcond
- * @brief Frees the memory allocated for the FDF structure, including arrays for z data and color map.
+ * @brief Frees the memory allocated for the FDF structure, including arrays \
+ * @brief z data and color map.
  * @param *data Pointer to the FDF data structure to be freed.
  * @return (void) Data Freed.
  */
@@ -103,7 +104,7 @@ void	destroy_fdf(t_fdf *data)
  * @code 
  * void destroy_all(t_fdf *data);
  * @endcond
- * @brief Frees all allocated memory and resources associated with the FDF program.
+ * @brief Frees all allocated memory and resources associated to the program.
  * @brief Calls destroy_mlx and destroy_fdf functions, then exits the program.
  * @param *data Pointer to the FDF data structure.
  * @return (void) All Resources Freed.
