@@ -6,12 +6,21 @@
 /*   By: danalmei <danalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 17:31:36 by danalmei          #+#    #+#             */
-/*   Updated: 2023/12/20 20:01:14 by danalmei         ###   ########.fr       */
+/*   Updated: 2023/12/21 15:07:59 by danalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+/**
+ * @code 
+ * void clear_image(t_fdf *data, int color);
+ * @endcond
+ * @brief Clears the window and sets the entire image to a specific color.
+ * @param *data Pointer to the FDF data structure containing image data.
+ * @param color Integer value representing the color.
+ * @return (void) Image Cleared.
+ */
 void	clear_image(t_fdf *data, int color)
 {
 	int	x;
@@ -31,6 +40,18 @@ void	clear_image(t_fdf *data, int color)
 	}
 }
 
+/**
+ * @code 
+ * void breshenham(t_pt pt1, t_pt pt2, t_fdf *data, t_pt color);
+ * @endcond
+ * @brief Implements the Bresenham's line algorithm to draw a \
+ * @brief between two points.
+ * @param pt1 First point structure for the line.
+ * @param pt2 Second point structure for the line.
+ * @param *data Pointer to the FDF data structure.
+ * @param color Structure holding start and end colors for the line.
+ * @return (void) Line Drawn.
+ */
 void	breshenham(t_pt pt1, t_pt pt2, t_fdf *data, t_pt color)
 {
 	float	x_step;
@@ -57,6 +78,17 @@ void	breshenham(t_pt pt1, t_pt pt2, t_fdf *data, t_pt color)
 	}
 }
 
+/**
+ * @code 
+ * void draw_line(t_pt pt1, t_pt pt2, t_fdf *data);
+ * @endcond
+ * @brief Prepares and draws a line between two points using the \ 
+ * @brief Bresenham's algorithm.
+ * @param pt1 First point structure for the line.
+ * @param pt2 Second point structure for the line.
+ * @param *data Pointer to the FDF data structure containing map.
+ * @return (void) Line Prepared and Drawn.
+ */
 void	draw_line(t_pt pt1, t_pt pt2, t_fdf *data)
 {
 	int		z;
@@ -77,6 +109,17 @@ void	draw_line(t_pt pt1, t_pt pt2, t_fdf *data)
 	breshenham(pt1, pt2, data, color);
 }
 
+/**
+ * @code 
+ * void draw2(t_pt *pt1, t_pt *pt2, t_pt *curr_pt, t_fdf *data);
+ * @endcond
+ * @brief Draws lines between adjacent points in the map grid.
+ * @param *pt1 Pointer to the first point structure.
+ * @param *pt2 Pointer to the second point structure.
+ * @param *curr_pt Pointer to the current point structure in the grid.
+ * @param *data Pointer to the FDF data structure containing map.
+ * @return (void) Adjacent Lines Drawn.
+ */
 void	draw2(t_pt *pt1, t_pt *pt2, t_pt *curr_pt, t_fdf *data)
 {
 	if (curr_pt->x < (data->width - 1))
@@ -97,6 +140,15 @@ void	draw2(t_pt *pt1, t_pt *pt2, t_pt *curr_pt, t_fdf *data)
 	}
 }
 
+/**
+ * @code 
+ * void draw(t_fdf *data);
+ * @endcond
+ * @brief Main drawing function that iterates over each point \ 
+ * @brief in the map to draw the grid.
+ * @param *data Pointer to the FDF data structure containing map.
+ * @return (void) Grid Drawn.
+ */
 void	draw(t_fdf *data)
 {
 	t_pt	curr_pt;

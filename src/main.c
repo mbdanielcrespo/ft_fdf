@@ -12,12 +12,31 @@
 
 #include "fdf.h"
 
+/**
+ * @code 
+ * int close_window(t_fdf *data);
+ * @endcond
+ * @brief Closes the window and frees all allocated resources.
+ * @param *data Pointer to the FDF data structure.
+ * @return (int) Status Code.
+ */
 int	close_window(t_fdf *data)
 {
 	destroy_all(data);
 	return (0);
 }
 
+/**
+ * @code 
+ * void my_mlx_pixel_put(t_data *data, int x, int y, int color);
+ * @endcond
+ * @brief Puts a pixel with specified color at given coordinates in the image.
+ * @param *data Pointer to the data structure containing image details.
+ * @param x X-coordinate of the pixel.
+ * @param y Y-coordinate of the pixel.
+ * @param color Color of the pixel to be put.
+ * @return (void) Pixel Set.
+ */
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
@@ -28,6 +47,15 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
+/**
+ * @code 
+ * int deal_key(int key, t_fdf *data);
+ * @endcond
+ * @brief Handles key press events and performs appropriate actions.
+ * @param key Integer representing the key code.
+ * @param *data Pointer to the FDF data structure.
+ * @return (int) Status Code.
+ */
 int	deal_key(int key, t_fdf *data)
 {
 	if (key != 65307)
@@ -37,6 +65,14 @@ int	deal_key(int key, t_fdf *data)
 	return (0);
 }
 
+/**
+ * @code 
+ * int invalid_read(char *file_name);
+ * @endcond
+ * @brief Checks if the file can be opened for reading.
+ * @param *file_name Pointer to the name of the file.
+ * @return (int) Read Status.
+ */
 int	invalid_read(char *file_name)
 {
 	int	fd;
@@ -47,6 +83,16 @@ int	invalid_read(char *file_name)
 	return (0);
 }
 
+/**
+ * @code 
+ * int main(int argc, char **argv);
+ * @endcond
+ * @brief Main function to initialize and run the FDF program.
+ * @brief Checks arguments, initializes data, and starts the GI.
+ * @param argc Argument count.
+ * @param **argv Argument vector.
+ * @return (int) Program Exit Status.
+ */
 int	main(int argc, char **argv)
 {
 	t_fdf	*data;
