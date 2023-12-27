@@ -95,7 +95,6 @@ void	draw_line(t_pt pt1, t_pt pt2, t_fdf *data)
 	int		z1;
 	t_pt	zpt;
 	t_pt	color;
-
 	z = data->z_data[(int)pt1.y][(int)pt1.x];
 	z1 = data->z_data[(int)pt2.y][(int)pt2.x];
 	color.x = data->color_map[(int)pt1.y][(int)pt1.x];
